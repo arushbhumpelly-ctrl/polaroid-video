@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farewell Memories</title>
+
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: black;
+    }
+
+    video.camera {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    video.memory {
+      position: fixed;
+      top: 15%;
+      left: 10%;
+      width: 80%;
+      z-index: 2;
+      border-radius: 8px;
+    }
+
+    img.frame {
+      position: fixed;
+      top: 10%;
+      left: 5%;
+      width: 90%;
+      z-index: 3;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- CAMERA BACKGROUND -->
+  <video class="camera" autoplay playsinline></video>
+
+  <!-- MEMORY VIDEO -->
+  <video class="memory" autoplay loop muted playsinline>
+    <source src="video.mp4" type="video/mp4">
+  </video>
+
+  <!-- POLAROID FRAME -->
+  <img src="frame.png" class="frame">
+
+  <script>
+    navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "environment" },
+      audio: false
+    }).then(stream => {
+      document.querySelector(".camera").srcObject = stream;
+    });
+  </script>
+
+</body>
+</html>
